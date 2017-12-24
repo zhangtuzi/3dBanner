@@ -74,8 +74,9 @@
       'left':'80%',
       'top':'0',
       'margin-top':bannerObj.lbImgH*(0.3)/2,
-      'z-index':'1',
-      'visibility': 'visible'
+      'visibility': 'visible',
+      'z-index':'1'
+
     };
     lbReset();
     function moveF(clickIndex,clickDom){
@@ -87,7 +88,7 @@
         clickDom.prev().prev().prev().css({'z-index':'1'}).animate(showLeft3,300);
         clickDom.next().css({'z-index':'3'}).animate(showRight1,300);
         clickDom.next().next().css({'z-index':'2'}).animate(showRight2,300);
-        clickDom.next().next().next().css({'z-index':'1'}).animate(showRight3,300);
+        clickDom.next().next().next().css(showRight3);
       }else if(clickIndex == 2*bannerObj.lbLg-1){
         console.log(2)
         clickDom.css({'z-index':'4'}).animate(showCenter,300);
