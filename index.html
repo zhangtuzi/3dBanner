@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>3d轮播</title>
+    <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+    <style media="screen">
+    *{
+      margin:0;
+      padding:0;
+      list-style: none;
+    }
+    #warpDiv{
+      width: 500px;
+      position: relative;
+      overflow: hidden;
+      margin: 100px auto;
+    }
+    .imgDiv{
+      position: absolute;
+      visibility: hidden;
+    }
+    .imgDiv img{
+      display: block;
+      width: 100%;
+      height: auto;
+      visibility: inherit;
+    }
+    </style>
+  </head>
+  <body>
+    <ul id="warpDiv">
+      <li class="imgDiv">
+        <img src="images/caidanCenter0.jpg" alt="">
+      </li>
+      <li class="imgDiv">
+        <img src="images/caidanLeft0.jpg" alt="">
+      </li>
+      <li class="imgDiv">
+        <img src="images/caidanRight1.jpg" alt="">
+      </li>
+      <li class="imgDiv">
+        <img src="images/caidanRight2.jpg" alt="">
+      </li>
+      <li class="imgDiv">
+        <img src="images/caidanRight3.jpg" alt="">
+      </li>
+      <li class="imgDiv">
+        <img src="images/caidanRight3.jpg" alt="">
+      </li>
+      <li class="imgDiv">
+        <img src="images/caidanRight3.jpg" alt="">
+      </li>
+    </ul>
+    <script type="text/javascript" src="3dBanner.js"></script>
+    <script type="text/javascript">
+      // BannerInit('warpDiv');
+    </script>
+  </body>
+</html>
