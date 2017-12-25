@@ -14,7 +14,7 @@
       width: 500px;
       position: relative;
       overflow: hidden;
-      margin: 100px auto;
+      margin: 100px auto 0;
     }
     .imgDiv{
       position: absolute;
@@ -25,6 +25,30 @@
       width: 100%;
       height: auto;
       visibility: inherit;
+    }
+    #imgIndexUl{
+      margin: 50px auto 0;
+      width: 500px;
+      height: 50px;
+    }
+    #imgIndexUl>li{
+      float: left;
+      width: 20px;
+      height: 20px;
+      margin: 15px;
+      border-radius: 50%;
+      overflow: hidden;
+      font-size: 15px;
+      text-align: center;
+      line-height: 20px;
+      background: #fff;
+      border:1px solid #ccc;
+      color: #ccc;
+      cursor: pointer;
+    }
+    #imgIndexUl>li:hover,.imgInddexCurrent{
+      background: #ccc!important;
+      color: #fff!important;
     }
     </style>
   </head>
@@ -46,6 +70,7 @@
         <img src="images/caidanRight3.jpg" alt="">
       </li>
     </ul>
+    <ul id="imgIndexUl"></ul>
     <script type="text/javascript" src="3dBanner.js"></script>
 
   </body>

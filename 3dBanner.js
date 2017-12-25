@@ -1,12 +1,24 @@
     var bannerObj = {
-      warpDiv:'',
-      lbLg:0,
-      startHtml:'',
-      lbDiv:'',
-      lbImgH:0,
+      warpDiv:'',//播外容器dom
+      indexUl:'',//轮播图下方控制点外部容器
+      indexLi:'',//轮播图下方控制点集合
+      lbLg:0,//轮播图长度
+      startHtml:'',//轮播图初始长度
+      lbDiv:'',//轮播图的集合
+      lbImgH:0,//轮播图的高度
     };
-    bannerObj.warpDiv = $('#warpDiv')//获取轮播外容器dom
+    bannerObj.warpDiv = $('#warpDiv');//获取轮播外容器dom
+    bannerObj.indexUl = $('#imgIndexUl');//获取轮播图下方控制点的外部容器
     bannerObj.lbLg = bannerObj.warpDiv.children().length;//获取需要轮播的初始长度
+    var indexHtml='';
+    for(var i=0;i<bannerObj.lbLg;i++){
+      indexHtml+='<li>'+(i+1)+'</li>';
+    }
+    bannerObj.indexUl.append(indexHtml);
+    bannerObj.indexUl.width(bannerObj.lbLg*52);
+    bannerObj.indexLi = bannerObj.indexUl.children();//获取轮播图下方控制点集合
+    bannerObj.indexLi.eq(0).addClass('imgInddexCurrent');
+
     bannerObj.startHtml = bannerObj.warpDiv.html();//获取需要轮播的内容
     bannerObj.warpDiv.prepend(bannerObj.startHtml);
     bannerObj.warpDiv.append(bannerObj.startHtml);
@@ -79,6 +91,33 @@
 
     };
     lbReset();
+
+    //轮播图片点击切换
+    bannerObj.lbDiv.click(function(){
+      bannerObj.lbDiv.css({'z-index':'1'});
+      clearInterval(lbSet);
+      thisIndex = $(this).index();//获取当前下标
+      imgIndexUlChange(thisIndex);
+      var _this = $(this);
+      moveF(thisIndex,_this);
+      lbSet = setInterval(setFun,4000);
+    })
+
+    var thisIndex = bannerObj.lbLg;
+    var lbSet = setInterval(setFun,4000);
+
+    //点击下方圆点切换轮播
+    bannerObj.indexUl.delegate('li','click',function(){
+      clearInterval(lbSet);
+      bannerObj.lbDiv.css({'z-index':'1'});
+      thisIndex = $(this).index();//获取当前下标
+      bannerObj.indexLi.removeClass('imgInddexCurrent');
+      $(this).addClass('imgInddexCurrent');
+      var _this = bannerObj.lbDiv.eq(thisIndex+bannerObj.lbLg);
+      moveF(thisIndex+bannerObj.lbLg,_this);
+      thisIndex = thisIndex+bannerObj.lbLg;
+      lbSet = setInterval(setFun,4000);
+    })
     function moveF(clickIndex,clickDom){
       if(bannerObj.lbLg-2<clickIndex &&clickIndex<2*bannerObj.lbLg-1){
         console.log(1)
@@ -109,17 +148,16 @@
         clickDom.next().next().next().css({'z-index':'1'}).animate(showRight3,300,lbResetEnd);
       }
     }
-    bannerObj.lbDiv.click(function(){
-      bannerObj.lbDiv.css({'z-index':'1'});
-      // clearInterval(lbSet);
-      thisIndex = $(this).index();//获取当前下标
-      console.log(thisIndex)
-      var _this = $(this);
-      moveF(thisIndex,_this);
-      // lbSet = setInterval(setFun,2000)
-    })
-    var thisIndex = bannerObj.lbLg;
-    // var lbSet = setInterval(setFun,2000)
+    //下方圆点自动切换
+    function imgIndexUlChange(activeIndex){
+      if(activeIndex>=bannerObj.lbLg){
+        bannerObj.indexLi.removeClass('imgInddexCurrent');
+        bannerObj.indexLi.eq(activeIndex-bannerObj.lbLg).addClass('imgInddexCurrent');
+      }else{
+        bannerObj.indexLi.removeClass('imgInddexCurrent');
+        bannerObj.indexLi.eq(activeIndex).addClass('imgInddexCurrent');
+      }
+    }
     function setFun(){
         thisIndex++;//获取当前下标
         if(1<thisIndex &&thisIndex<2*bannerObj.lbLg){
@@ -127,6 +165,7 @@
         }else{
           thisIndex = bannerObj.lbLg;
         }
+        imgIndexUlChange(thisIndex);
         var _this = bannerObj.lbDiv.eq(thisIndex);
         moveF(thisIndex,_this);
     }
